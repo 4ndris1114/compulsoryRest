@@ -4,8 +4,7 @@ using System.Text.Json.Serialization;
 
 namespace compulsoryRest.Models;
 
-public class Movie
-{
+public class Movie {
     [BsonId]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set;}

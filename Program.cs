@@ -1,5 +1,5 @@
 using DotNetEnv;
-using compulsoryRest.Repositories.database;
+using compulsoryRest.Database;
 
 var builder = WebApplication.CreateBuilder(args);
 

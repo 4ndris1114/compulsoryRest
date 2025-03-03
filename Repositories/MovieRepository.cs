@@ -1,0 +1,2 @@
+namespace compulsoryRest.Repositories;
+

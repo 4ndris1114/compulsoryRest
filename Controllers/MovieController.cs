@@ -79,7 +79,7 @@ public class MovieController : BaseController<Movie> {
     /// <returns>The updated movie.</returns>
     public override async Task<ActionResult<Movie>> Update(string id, Movie movie) {
         try {
-            if (id != movie.Id)
+            if (GetById(id) == null)
                 return BadRequest("Invalid movie id format");
             ValidateMovie(movie);
 

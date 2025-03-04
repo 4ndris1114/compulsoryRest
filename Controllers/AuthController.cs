@@ -142,7 +142,7 @@ public class AuthController : ControllerBase {
         return hashedInputPassword == storedHash;
     }
 
-    //generate salt:
+    //generate salt
     private byte[] GenerateSalt() {
         var salt = new byte[16]; 
         using (var rng = RandomNumberGenerator.Create()) {

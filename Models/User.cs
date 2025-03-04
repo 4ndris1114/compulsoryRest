@@ -10,7 +10,7 @@ public class User {
     public string? Id { get; set; }
 
     [Required]
-    [EmailAddress]
+    [EmailAddress(ErrorMessage = "Invalid email address")]
     [BsonElement("email")]
     public string? Email { get; set; }
 

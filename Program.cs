@@ -9,21 +9,14 @@ using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Load environment variables
+// Load env variables
 Env.Load();
-
-// Access the MongoDB connection string
-var mongoDbConnectionString = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING");
-
-// If the environment variable is not set, use a default connection string (for local development)
-if (string.IsNullOrEmpty(mongoDbConnectionString)) {
-    mongoDbConnectionString = "mongodb://localhost:27017"; // Fallback for local development
-}
+var mongoDbConnectionString = Environment.GetEnvironmentVariable("MONGO_CONNECTION_STRING")!;
 
 // Add environment variables to the configuration
 builder.Configuration.AddEnvironmentVariables();
 
-// Add services to the container.
+// Add services to the container
 builder.Services.AddControllers();
 
 // Add CORS policy
@@ -58,7 +51,7 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(xmlFile);
 });
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // This line requires JwtBearerDefaults - weird with .net 8
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters

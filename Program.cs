@@ -25,6 +25,15 @@ builder.Configuration.AddEnvironmentVariables();
 // Add services to the container.
 builder.Services.AddControllers();
 
+// Add CORS policy
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", builder => 
+        builder.AllowAnyOrigin()
+               .AllowAnyMethod()
+               .AllowAnyHeader());
+});
+
 builder.Services.AddScoped<MovieRepository>();
 builder.Services.AddScoped<UserRepository>();
 
@@ -54,6 +63,9 @@ builder.Services.AddAuthorization();  // To use authorization
 
 
 var app = builder.Build();
+
+// Enable CORS
+app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment()) {

@@ -1,6 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using compulsoryRest.Models;
 using compulsoryRest.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MongoDB.Bson;
@@ -8,6 +9,7 @@ using MongoDB.Bson;
 namespace compulsoryRest.Controllers;
 [Route("api/[controller]")]
 [ApiController]
+[Authorize]
 public class MovieController : BaseController<Movie> {
     private readonly MovieRepository _movieRepository;
     private readonly ILogger<MovieController> _logger;

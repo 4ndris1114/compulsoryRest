@@ -140,11 +140,11 @@ public class AuthController : ControllerBase {
     //generate jwt token
     private string GenerateJwtToken(User user) {
         var claims = new[] {
-            new Claim(JwtRegisteredClaimNames.Sub, user.Email),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Email!),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 
-        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_SECRET"]));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JWT_SECRET"]!));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
         var token = new JwtSecurityToken(
@@ -160,7 +160,7 @@ public class AuthController : ControllerBase {
     // Get Principal from the expired JWT token
     private ClaimsPrincipal? GetPrincipalFromExpiredToken(string token) {
         var tokenHandler = new JwtSecurityTokenHandler();
-        var key = Encoding.UTF8.GetBytes(_configuration["JWT_SECRET"]);
+        var key = Encoding.UTF8.GetBytes(_configuration["JWT_SECRET"]!);
         try {
             var principal = tokenHandler.ValidateToken(token, new TokenValidationParameters {
                 ValidateIssuer = false,

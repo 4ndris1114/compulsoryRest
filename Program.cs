@@ -1,6 +1,10 @@
 using DotNetEnv;
 using compulsoryRest.Database;
 using compulsoryRest.Repositories;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.Text;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +35,23 @@ builder.Services.AddSingleton<MongoDbContext>(sp =>
 
 // Add Swagger services
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // This line requires JwtBearerDefaults
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidIssuer = "localhost",
+            ValidAudience = "localhost",
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["JWT_SECRET"]!))
+        };
+    });
+
+builder.Services.AddAuthorization();  // To use authorization
+
 
 var app = builder.Build();
 

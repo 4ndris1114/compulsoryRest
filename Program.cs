@@ -77,6 +77,14 @@ builder.Services.AddAuthorization();  // To use authorization
 
 var app = builder.Build();
 
+// test data seeder
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<MongoDbContext>();
+    var seeder = new DatabaseSeeder(dbContext);
+    seeder.SeedMovies(20); // Generate 20 test movies
+}
+
 // Enable CORS
 app.UseCors("AllowAll");
 

@@ -20,7 +20,10 @@ public class MovieController : BaseController<Movie> {
         _logger = logger;
     }
 
-    // GET: api/movie
+    /// <summary>
+    /// Retreives all movies from the database.
+    /// </summary>
+    /// <returns>A list of movies.</returns>
     public override async Task<ActionResult<IEnumerable<Movie>>> GetAll() {
         try {
             var movies = await _movieRepository.GetAllAsync();
@@ -31,7 +34,11 @@ public class MovieController : BaseController<Movie> {
         }
     }
 
-    // GET: api/movie/{id}
+    /// <summary>
+    /// Retreives a specific movie from the database.
+    /// </summary>
+    /// <param name="id">The id of the movie to retreive.</param>
+    /// <returns>The desired movie.</returns>
     public override async Task<ActionResult<Movie>> GetById(string id) {
         try {
             if (!ObjectId.TryParse(id, out _))
@@ -45,7 +52,11 @@ public class MovieController : BaseController<Movie> {
         }
     }
 
-    // POST: api/movie
+    /// <summary>
+    /// Creates a new movie in the database.
+    /// </summary>
+    /// <param name="movie">The movie to create.</param>
+    /// <returns>The created movie.</returns>
     public override async Task<ActionResult<Movie>> Create(Movie movie) {
         try {
             ValidateMovie(movie);
@@ -60,7 +71,12 @@ public class MovieController : BaseController<Movie> {
         }
     }
 
-    // PUT: api/movie/{id}
+    /// <summary>
+    /// Updates an existing movie in the database.
+    /// </summary>
+    /// <param name="id">The id of the movie to update.</param>
+    /// <param name="movie"></param>
+    /// <returns>The updated movie.</returns>
     public override async Task<ActionResult<Movie>> Update(string id, Movie movie) {
         try {
             if (id != movie.Id)
@@ -81,7 +97,11 @@ public class MovieController : BaseController<Movie> {
         }
     }
 
-    // DELETE: api/movie/{id}
+    /// <summary>
+    /// Deletes an existing movie from the database.
+    /// </summary>
+    /// <param name="id">The id of the movie to delete.</param>
+    /// <returns>No content.</returns>
     public override async Task<ActionResult<Movie>> Delete(string id) {
         try {
             var existingMovie = await _movieRepository.GetByIdAsync(id);
@@ -96,7 +116,11 @@ public class MovieController : BaseController<Movie> {
         }
     }
 
-    // GET: api/movie/genre/{genre}
+    /// <summary>
+    /// Retreives all movies from the database with a specific genre.
+    /// </summary>
+    /// <param name="genre">The genre of the movies to retreive.</param>
+    /// <returns>A list of movies.</returns>
     [HttpGet("genre/{genre}")]
     public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesByGenre(string genre) {
         try {
@@ -110,7 +134,11 @@ public class MovieController : BaseController<Movie> {
         }
     }
 
-    // GET: api/movie/year/{year}
+    /// <summary>
+    /// Retreives all movies from the database with a specific year.
+    /// </summary>
+    /// <param name="year">The year of the movies to retreive.</param>
+    /// <returns>A list of movies.</returns>
     [HttpGet("year/{year}")]
     public async Task<ActionResult<IEnumerable<Movie>>> GetMoviesByYear(int year) {
         try {

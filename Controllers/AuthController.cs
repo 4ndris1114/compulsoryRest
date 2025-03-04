@@ -25,6 +25,11 @@ public class AuthController : ControllerBase {
         _configuration = configuration;
     }
 
+    /// <summary>
+    /// Registers a new user.
+    /// </summary>
+    /// <param name="user">The user details to register.</param>
+    /// <returns>A success message if the registration is successful.</returns>
     [HttpPost("register")]
     public async Task<ActionResult> RegisterUser(User user) {
         try {
@@ -48,6 +53,11 @@ public class AuthController : ControllerBase {
         }
     }
 
+    /// <summary>
+    /// Logs in a registered user. 
+    /// </summary>
+    /// <param name="userLogin">The user details to log in.</param>
+    /// <returns>A success message if the login is successful.</returns>
     [HttpPost("login")]
     public async Task<ActionResult> LoginUser(UserLogin userLogin) {
         try {
@@ -73,6 +83,10 @@ public class AuthController : ControllerBase {
         }
     }
 
+    /// <summary>
+    /// Verifies the validity of a JWT token.
+    /// </summary>
+    /// <returns>A success message if the token is valid.</returns>
     [HttpGet("verifyToken")]
     public IActionResult VerifyToken() {
         try {

@@ -46,13 +46,16 @@ builder.Services.AddSingleton<MongoDbContext>(sp =>
 // Add Swagger services
 builder.Services.AddSwaggerGen(options =>
 {
-    // Optional: You can set up descriptions for endpoints and models
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Title = "Compulsory REST API",
         Version = "v1",
         Description = "A simple API to manage movies and users"
     });
+
+    // Enable XML comments
+    var xmlFile = Path.Combine(AppContext.BaseDirectory, "compulsory.xml");
+    options.IncludeXmlComments(xmlFile);
 });
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // This line requires JwtBearerDefaults - weird with .net 8

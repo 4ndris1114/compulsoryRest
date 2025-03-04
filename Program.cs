@@ -15,19 +15,19 @@ if (string.IsNullOrEmpty(mongoDbConnectionString)) {
     mongoDbConnectionString = "mongodb://localhost:27017"; // Fallback for local development
 }
 
+// Add environment variables to the configuration
+builder.Configuration.AddEnvironmentVariables();
+
 // Add services to the container.
 builder.Services.AddControllers();
 
 builder.Services.AddScoped<MovieRepository>();
-
+builder.Services.AddScoped<UserRepository>();
 
 // Add MongoDB connection service (singleton)
 builder.Services.AddSingleton<MongoDbContext>(sp =>
     new MongoDbContext(mongoDbConnectionString)
 );
-
-// Add the JWT Service (if applicable)
-// builder.Services.AddSingleton<IJwtService, JwtService>();
 
 // Add Swagger services
 builder.Services.AddSwaggerGen();

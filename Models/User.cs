@@ -19,7 +19,6 @@ public class User {
     [BsonElement("password")]
     public string? Password { get; set; }
 
-    [Required]
     [BsonElement("createdAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

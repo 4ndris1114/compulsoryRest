@@ -4,6 +4,7 @@ using compulsoryRest.Repositories;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
+using Microsoft.OpenApi.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,7 +44,16 @@ builder.Services.AddSingleton<MongoDbContext>(sp =>
 );
 
 // Add Swagger services
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    // Optional: You can set up descriptions for endpoints and models
+    options.SwaggerDoc("v1", new OpenApiInfo
+    {
+        Title = "Compulsory REST API",
+        Version = "v1",
+        Description = "A simple API to manage movies and users"
+    });
+});
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // This line requires JwtBearerDefaults - weird with .net 8
     .AddJwtBearer(options =>

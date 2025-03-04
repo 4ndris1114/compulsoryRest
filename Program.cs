@@ -36,7 +36,7 @@ builder.Services.AddSingleton<MongoDbContext>(sp =>
 // Add Swagger services
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // This line requires JwtBearerDefaults
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme) // This line requires JwtBearerDefaults - weird with .net 8
     .AddJwtBearer(options =>
     {
         options.TokenValidationParameters = new TokenValidationParameters

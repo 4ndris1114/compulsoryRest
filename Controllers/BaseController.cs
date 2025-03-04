@@ -22,8 +22,8 @@ public abstract class BaseController<T> : ControllerBase where T : class {
     public abstract Task<ActionResult<T>> Create(T entity);
 
     [HttpPut("{id}")]
-    public abstract Task<IActionResult> Update(string id, T entity);
+    public abstract Task<ActionResult<T>> Update(string id, T entity);
 
     [HttpDelete("{id}")]
-    public abstract Task<IActionResult> Delete(string id);
+    public abstract Task<ActionResult<T>> Delete(string id);
 }

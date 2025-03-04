@@ -10,25 +10,16 @@ public class User {
     public string? Id { get; set; }
 
     [Required]
-    [StringLength(50, MinimumLength = 2)]
-    [BsonElement("name")]
-    public string? Name { get; set; }
-
-    [Required]
     [EmailAddress]
     [BsonElement("email")]
     public string? Email { get; set; }
 
     [Required]
     [MinLength(8, ErrorMessage = "Password must be at least 8 characters long.")]
-    [BsonElement("passwordHash")]
-    public string? PasswordHash { get; set; } // Store hashed passwords!
+    [BsonElement("password")]
+    public string? Password { get; set; }
 
     [Required]
     [BsonElement("createdAt")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-
-    [Required]
-    [BsonElement("updatedAt")]
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }

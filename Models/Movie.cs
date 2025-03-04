@@ -26,7 +26,7 @@ public class Movie {
     [Required]
     [Range(0, 10, ErrorMessage = "Rating must be between 0 and 10")]
     [BsonElement("rating")]
-    public double Rating { get; set; } = double.NaN;
+    public double Rating { get; set; } = 0;
 
     [BsonElement("director")]
     [StringLength(255, MinimumLength = 2, ErrorMessage = "Director must be between 2 and 255 characters")]

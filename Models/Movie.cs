@@ -1,11 +1,13 @@
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace compulsoryRest.Models;
 
 public class Movie {
     [BsonId]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [BsonRepresentation(BsonType.ObjectId)]
     public string? Id { get; set;}
 
@@ -38,8 +40,10 @@ public class Movie {
     public string Description { get; set; } = "N/A";
 
     [BsonElement("createdAt")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     [BsonElement("updatedAt")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
 }
